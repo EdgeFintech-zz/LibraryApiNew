@@ -4,17 +4,20 @@ using JsonApiDotNetCore.Data;
 using JsonApiDotNetCore.Internal.Query;
 using JsonApiDotNetCore.Services;
 using LibraryApiNew.Models;
+using LibraryApiNew.Repositories;
+using LibraryApiNew.Services;
 using Microsoft.Extensions.Logging;
 
 namespace LibraryApiNew.Domain.Authors
 {
-    public class AuthorsRepository : DefaultEntityRepository<Author>
+    public class AuthorsRepository : BelongsToUserRepository<Author>
     {
         public AuthorsRepository(
             ILoggerFactory loggerFactory,
             IJsonApiContext jsonApiContext,
-            IDbContextResolver contextResolver
-        ) : base(loggerFactory, jsonApiContext, contextResolver)
+            IDbContextResolver contextResolver,
+            CurrentUserService currentUser
+        ) : base(loggerFactory, jsonApiContext, contextResolver, currentUser)
         { }
 
         public override IQueryable<Author> Filter(IQueryable<Author> authors, FilterQuery filterQuery)

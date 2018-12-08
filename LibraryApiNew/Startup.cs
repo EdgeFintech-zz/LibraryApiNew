@@ -10,6 +10,7 @@ using LibraryApiNew.Domain.Authors;
 using LibraryApiNew.Domain.Books;
 using LibraryApiNew.Domain.Users;
 using LibraryApiNew.Models;
+using LibraryApiNew.Repositories;
 using LibraryApiNew.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -54,6 +55,7 @@ namespace LibraryApiNew
             services.AddScoped<CurrentUserService>();
             services.AddScoped<IEntityRepository<Author>, AuthorsRepository>();
             services.AddScoped<IEntityRepository<Book>, BooksRepository>();
+            services.AddScoped<IEntityRepository<Review>, BelongsToUserRepository<Review>>();
             services.AddScoped<ResourceDefinition<User>, UserResource>();
         }
 
